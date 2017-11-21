@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<component name="dataSourceStorage">
+  <data-source name="MySQL - gudenergy@192.168.170.131" uuid="62a95ecd-1ee0-4b6d-b948-747e3378c748">
+    <database-info product="MySQL" version="5.5.50-MariaDB" jdbc-version="4.0" driver-name="MySQL Connector Java" driver-version="mysql-connector-java-5.1.40 ( Revision: 402933ef52cad9aa82624e80acbea46e3a701ce6 )">
+      <extra-name-characters>#@</extra-name-characters>
+      <identifier-quote-string>`</identifier-quote-string>
+    </database-info>
+    <case-sensitivity plain-identifiers="exact" quoted-identifiers="exact"/>
+    <schema name="" catalog="gudenergy"/>
+    <table name="credentialsTbl" schema="" catalog="gudenergy" type="TABLE">
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="pin" sqlType="VARCHAR" precision="30" scale="0" nullable="false" jdbcType="12"/>
+      <column name="employeeID" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <foreign-key name="credentialsTbl_ibfk_1" columns="employeeID" ref-table="employeeTbl" ref-schema="" ref-catalog="gudenergy" ref-columns="id" update-rule="0" delete-rule="0" deferrability="2"/>
+      <index name="pin" unique="true" columns="pin"/>
+    </table>
+    <table name="driverTbl" schema="" catalog="gudenergy" type="TABLE">
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="fname" sqlType="VARCHAR" precision="25" scale="0" nullable="false" jdbcType="12"/>
+      <column name="lname" sqlType="VARCHAR" precision="25" scale="0" nullable="false" jdbcType="12"/>
+      <column name="nrc" sqlType="VARCHAR" precision="15" scale="0" nullable="false" jdbcType="12"/>
+      <column name="licenseNumber" sqlType="VARCHAR" precision="30" scale="0" nullable="false" jdbcType="12"/>
+      <column name="phoneNumber" sqlType="VARCHAR" precision="20" scale="0" nullable="false" jdbcType="12"/>
+      <column name="vehicleID" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <foreign-key name="driverTbl_ibfk_1" columns="vehicleID" ref-table="vehicleTbl" ref-schema="" ref-catalog="gudenergy" ref-columns="id" update-rule="0" delete-rule="0" deferrability="2"/>
+      <index name="vehicleNumber" unique="false" columns="vehicleID"/>
+    </table>
+    <table name="employeeTbl" schema="" catalog="gudenergy" type="TABLE">
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="fname" sqlType="VARCHAR" precision="30" scale="0" nullable="false" jdbcType="12"/>
+      <column name="lname" sqlType="VARCHAR" precision="30" scale="0" nullable="false" jdbcType="12"/>
+      <column name="nrc" sqlType="VARCHAR" precision="15" scale="0" nullable="false" jdbcType="12"/>
+      <column name="employeeType" sqlType="VARCHAR" precision="20" scale="0" nullable="false" jdbcType="12"/>
+      <column name="phoneNumber" sqlType="VARCHAR" precision="10" scale="0" nullable="false" jdbcType="12"/>
+      <column name="pin" sqlType="VARCHAR" precision="32" scale="0" nullable="false" jdbcType="12"/>
+      <column name="userName" sqlType="VARCHAR" precision="32" scale="0" nullable="false" jdbcType="12"/>
+      <column name="salt" sqlType="VARCHAR" precision="32" scale="0" nullable="false" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <exported-key name="credentialsTbl_ibfk_1" table="credentialsTbl" schema="" catalog="gudenergy" columns="employeeID"/>
+    </table>
+    <table name="ownerTbl" schema="" catalog="gudenergy" type="TABLE">
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="fname" sqlType="VARCHAR" precision="25" scale="0" nullable="false" jdbcType="12"/>
+      <column name="lname" sqlType="VARCHAR" precision="25" scale="0" nullable="false" jdbcType="12"/>
+      <column name="phoneNumber" sqlType="VARCHAR" precision="15" scale="0" nullable="false" jdbcType="12"/>
+      <column name="vehicleID" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <foreign-key name="ownerTbl_ibfk_1" columns="vehicleID" ref-table="vehicleTbl" ref-schema="" ref-catalog="gudenergy" ref-columns="id" update-rule="0" delete-rule="0" deferrability="2"/>
+      <index name="driverID" unique="false" columns="vehicleID"/>
+    </table>
+    <table name="paymentTbl" schema="" catalog="gudenergy" type="TABLE">
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="buyDate" sqlType="DATE" precision="10" scale="0" nullable="false" jdbcType="91"/>
+      <column name="amountDue" sqlType="VARCHAR" precision="15" scale="0" nullable="false" jdbcType="12"/>
+      <column name="fuelType" sqlType="VARCHAR" precision="30" scale="0" nullable="false" jdbcType="12"/>
+      <column name="vehicleID" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <foreign-key name="paymentTbl_ibfk_1" columns="vehicleID" ref-table="vehicleTbl" ref-schema="" ref-catalog="gudenergy" ref-columns="id" update-rule="0" delete-rule="0" deferrability="2"/>
+      <exported-key name="transactionTbl_ibfk_1" table="transactionTbl" schema="" catalog="gudenergy" columns="PaymentID"/>
+    </table>
+    <table name="stationTbl" schema="" catalog="gudenergy" type="TABLE">
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="name" sqlType="VARCHAR" precision="50" scale="0" nullable="false" jdbcType="12"/>
+      <column name="branch" sqlType="VARCHAR" precision="30" scale="0" nullable="false" jdbcType="12"/>
+      <primary-key name="PRIMARY" columns="id"/>
+    </table>
+    <table name="transactionTbl" schema="" catalog="gudenergy" type="TABLE">
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="transactionDate" sqlType="DATE" precision="10" scale="0" nullable="false" jdbcType="91"/>
+      <column name="amount" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <column name="PaymentID" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <foreign-key name="transactionTbl_ibfk_1" columns="PaymentID" ref-table="paymentTbl" ref-schema="" ref-catalog="gudenergy" ref-columns="id" update-rule="0" delete-rule="0" deferrability="2"/>
+    </table>
+    <table name="vehicleTbl" schema="" catalog="gudenergy" type="TABLE">
+      <column name="id" sqlType="INT" precision="10" scale="0" nullable="false" jdbcType="4" autoIncrement="true"/>
+      <column name="vehicleNumber" sqlType="VARCHAR" precision="10" scale="0" nullable="false" jdbcType="12"/>
+      <column name="dateOfRegistration" sqlType="DATE" precision="10" scale="0" nullable="false" jdbcType="91"/>
+      <primary-key name="PRIMARY" columns="id"/>
+      <exported-key name="driverTbl_ibfk_1" table="driverTbl" schema="" catalog="gudenergy" columns="vehicleID"/>
+      <exported-key name="ownerTbl_ibfk_1" table="ownerTbl" schema="" catalog="gudenergy" columns="vehicleID"/>
+      <exported-key name="paymentTbl_ibfk_1" table="paymentTbl" schema="" catalog="gudenergy" columns="vehicleID"/>
+    </table>
+  </data-source>
+</component>
